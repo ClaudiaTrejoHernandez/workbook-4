@@ -68,7 +68,7 @@ public class Employee {
             hoursWorked += currentShiftHours;
 
             System.out.println("Your punch-out time is: " + time);
-            System.out.println("You worked " + currentShiftHours + " hours this shift.");
+            System.out.println("Hours worked this shift: " + currentShiftHours);
             System.out.println("Your total hours worked are: " + hoursWorked);
 
         }else {
