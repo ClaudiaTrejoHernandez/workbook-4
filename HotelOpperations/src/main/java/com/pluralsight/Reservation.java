@@ -57,31 +57,3 @@ public class Reservation {
 
 }
 
-//    public String pricePerNight() {
-//        try {
-//
-//            if (!isWeekend() && roomType.equalsIgnoreCase("king")) {
-//                double pricePerNight = 139.00 + (139.00 * .1);
-//                return "Price per Night for a King Room on a Weekend: $" + pricePerNight;
-//            }
-//            if (!isWeekend() && roomType.equalsIgnoreCase("double")) {
-//                double pricePerNight = 124.00 + (124.00 * .1);
-//                return "Price per night for a Double Room on a Weekend: $" + pricePerNight;
-//
-//            }
-//            if (isWeekend && roomType.equalsIgnoreCase("king")) {
-//                double pricePerNight = 139.00;
-//                return "Price per Night for a King Room on a Weekday: $" + pricePerNight;
-//            }
-//            if (roomType.equalsIgnoreCase("double")) {
-//                double pricePerNight = 124.00;
-//                return "Price per night for a Double Room on a Weekday: $" + pricePerNight;
-//
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Please type valid room type: ");
-//        }
-//        return null;
-//    }
-
-
