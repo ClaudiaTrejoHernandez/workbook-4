@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 //Used to store and calculate payroll info about an employee.
@@ -15,12 +17,15 @@ public class Employee {
     private double punchOutTime;
     private boolean working = false;
 
+    private LocalDateTime currentPunchInTime;
+    private LocalDateTime currentPunchOutTime;
+
     public Employee(String employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
-        this.hoursWorked = hoursWorked;
+        this.hoursWorked = 0.0;
     }
 
     public double getRegularHours() {
@@ -69,6 +74,38 @@ public class Employee {
 
             System.out.println("Your punch-out time is: " + time);
             System.out.println("Hours worked this shift: " + currentShiftHours);
+            System.out.println("Your total hours worked are: " + hoursWorked);
+
+        }else {
+            System.out.println("You are already punched-out.");
+        }
+    }
+
+    //Overloaded Methods
+
+    public void punchIn() {
+
+        if (!working) {
+            currentPunchInTime = LocalDateTime.now();
+            working = true;
+            System.out.println("Your punch-in time is: " + currentPunchInTime.toLocalTime());
+        }else {
+            System.out.println("You are already punched-in.");
+        }
+    }
+
+    public void punchOut() {
+
+        if (working) {
+            currentPunchOutTime = LocalDateTime.now();
+            working = false;
+
+            Duration shiftDuration = Duration.between(currentPunchInTime, currentPunchOutTime);
+            double shiftHours = shiftDuration.toMinutes() / 60.0;
+            hoursWorked += shiftHours;
+
+            System.out.println("Your punch-out time is: " + punchOutTime);
+            System.out.printf("Hours worked this shift: %.2f%n", shiftHours);
             System.out.println("Your total hours worked are: " + hoursWorked);
 
         }else {
