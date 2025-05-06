@@ -6,55 +6,35 @@ public class Room {
 
     private int numberOfBeds;
     private double price;
-    boolean isOccupied = false;
-    boolean isDirty = false;
-    boolean isAvailable = true;
+    private boolean occupied;
+    private boolean dirty;
 
-    public Room(int numberOfBeds, double price, boolean isOccupied, boolean isDirty, boolean isAvailable) {
+    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
         this.numberOfBeds = numberOfBeds;
         this.price = price;
-        this.isOccupied = isOccupied;
-        this.isDirty = isDirty;
-        this.isAvailable = isAvailable;
+        this.occupied = occupied;
+        this.dirty = dirty;
     }
 
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
 
-    public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
-
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public boolean isOccupied() {
-        return isOccupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
+        return occupied;
     }
 
     public boolean isDirty() {
-        return isDirty;
+        return dirty;
     }
 
-    public void setDirty(boolean dirty) {
-        isDirty = dirty;
-    }
-
+    //Derived getter - no backing variable; uses two existing variables to
     public boolean isAvailable() {
-        return isAvailable;
+        return !occupied && !dirty;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
 }
