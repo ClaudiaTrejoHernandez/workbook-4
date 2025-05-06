@@ -4,17 +4,13 @@ package com.pluralsight;
 public class Reservation {
 
     private String roomType;
-    private double price;
     private int numberOfNights;
-    boolean isWeekend = false;
-    private double reservationTotal;
+    private boolean isWeekend;
 
-    public Reservation(String roomType, double price, int numberOfNights, boolean isWeekend, double reservationTotal) {
+    public Reservation(String roomType, int numberOfNights, boolean isWeekend) {
         this.roomType = roomType;
-        this.price = price;
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
-        this.reservationTotal = reservationTotal;
     }
 
     public String getRoomType() {
@@ -23,10 +19,6 @@ public class Reservation {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
-    }
-
-    public double getPrice() {
-        return price;
     }
 
     public int getNumberOfNights() {
@@ -45,8 +37,51 @@ public class Reservation {
         this.isWeekend = isWeekend;
     }
 
+    public double getPrice() {
+        double basePrice;
+        if (roomType.equalsIgnoreCase("king")) {
+            basePrice = 139.00;
+        } else {
+            basePrice = 124.00;
+        }
+
+        if (isWeekend) {
+            basePrice *= 1.10;
+        } return basePrice;
+
+    }
+
     public double getReservationTotal() {
-        return reservationTotal;
+        return getPrice() * numberOfNights;
     }
 
 }
+
+//    public String pricePerNight() {
+//        try {
+//
+//            if (!isWeekend() && roomType.equalsIgnoreCase("king")) {
+//                double pricePerNight = 139.00 + (139.00 * .1);
+//                return "Price per Night for a King Room on a Weekend: $" + pricePerNight;
+//            }
+//            if (!isWeekend() && roomType.equalsIgnoreCase("double")) {
+//                double pricePerNight = 124.00 + (124.00 * .1);
+//                return "Price per night for a Double Room on a Weekend: $" + pricePerNight;
+//
+//            }
+//            if (isWeekend && roomType.equalsIgnoreCase("king")) {
+//                double pricePerNight = 139.00;
+//                return "Price per Night for a King Room on a Weekday: $" + pricePerNight;
+//            }
+//            if (roomType.equalsIgnoreCase("double")) {
+//                double pricePerNight = 124.00;
+//                return "Price per night for a Double Room on a Weekday: $" + pricePerNight;
+//
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Please type valid room type: ");
+//        }
+//        return null;
+//    }
+
+
