@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 //Used to store and calculate payroll info about an employee.
 public class Employee {
@@ -12,20 +10,43 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
-
     private double punchInTime;
     private double punchOutTime;
-    private boolean working = false;
 
-    private LocalDateTime currentPunchInTime;
-    private LocalDateTime currentPunchOutTime;
-
-    public Employee(String employeeId, String name, String department, double payRate, double hoursWorked) {
+    public Employee(String employeeId, String name, String department, double payRate, double hoursWorked, double punchInTime, double punchOutTime) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
+        this.hoursWorked = hoursWorked;
+        this.punchInTime = punchInTime;
+        this.punchOutTime = punchOutTime;
+    }
+
+    public Employee() {
+        this.employeeId = "";
+        this.name = "";
+        this.department = "";
+        this.payRate = 0;
         this.hoursWorked = 0.0;
+        this.punchInTime = 0.0;
+        this.punchOutTime = 0.0;
+    }
+
+    public double getPunchInTime() {
+        return punchInTime;
+    }
+
+    public void setPunchInTime(double punchInTime) {
+        this.punchInTime = punchInTime;
+    }
+
+    public double getPunchOutTime() {
+        return punchOutTime;
+    }
+
+    public void setPunchOutTime(double punchOutTime) {
+        this.punchOutTime = punchOutTime;
     }
 
     public double getRegularHours() {
@@ -53,64 +74,21 @@ public class Employee {
     //Methods
 
     public void punchIn(double time) {
-
-        if (!working) {
-            punchInTime = time;
-            working = true;
-            System.out.println("Your punch-in time is: " + time);
-        }else {
-            System.out.println("You are already punched-in.");
-        }
-
+        setPunchInTime(time);
     }
 
     public void punchOut(double time) {
-
-        if (working) {
-            punchOutTime = time;
-            working = false;
-            double currentShiftHours = punchOutTime - punchInTime;
-            hoursWorked += currentShiftHours;
-
-            System.out.println("Your punch-out time is: " + time);
-            System.out.println("Hours worked this shift: " + currentShiftHours);
-            System.out.println("Your total hours worked are: " + hoursWorked);
-
-        }else {
-            System.out.println("You are already punched-out.");
-        }
+        setPunchOutTime(time);
     }
 
     //Overloaded Methods
 
-    public void punchIn() {
-
-        if (!working) {
-            currentPunchInTime = LocalDateTime.now();
-            working = true;
-            System.out.println("Your punch-in time is: " + currentPunchInTime.toLocalTime());
-        }else {
-            System.out.println("You are already punched-in.");
-        }
+    public void punchIn(LocalDateTime time) {
+        this.punchInTime = Double.parseDouble(String.valueOf(time));
     }
 
-    public void punchOut() {
-
-        if (working) {
-            currentPunchOutTime = LocalDateTime.now();
-            working = false;
-
-            Duration shiftDuration = Duration.between(currentPunchInTime, currentPunchOutTime);
-            double shiftHours = shiftDuration.toMinutes() / 60.0;
-            hoursWorked += shiftHours;
-
-            System.out.println("Your punch-out time is: " + punchOutTime);
-            System.out.printf("Hours worked this shift: %.2f%n", shiftHours);
-            System.out.println("Your total hours worked are: " + hoursWorked);
-
-        }else {
-            System.out.println("You are already punched-out.");
-        }
+    public void punchOut(LocalDateTime time) {
+        this.punchOutTime = Double.parseDouble(String.valueOf(time));
     }
 
 }
