@@ -16,6 +16,10 @@ public class Room {
         this.dirty = dirty;
     }
 
+    public Room() {
+
+    }
+
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
@@ -39,35 +43,42 @@ public class Room {
 
     //Methods:
 
-    public void checkIn() {
+    public boolean checkIn() {
 
-        if (!occupied && !dirty) {
+        if (isAvailable()) {
             System.out.println("You are now checked in.");
             occupied = true;
             dirty = true;
+            return true;
         }else {
             System.out.println("Sorry, the room is not available for check in.");
+            return false;
         }
 
     }
 
-    public void checkOut() {
+    public boolean checkOut() {
 
         if (occupied) {
             occupied = false;
+            dirty = true;
             System.out.println("You are checking out.");
+            return true;
         }else {
             System.out.println("Room was not occupied. Cannot check out of an empty room.");
+            return false;
         }
     }
 
-    public void cleanRoom() {
+    public boolean cleanRoom() {
 
-        if (dirty) {
+        if (!isOccupied() && isDirty()) {
             System.out.println("Cleaning room.");
             dirty = false;
+            return true;
         }else {
-            System.out.println("Room is clean.");
+            System.out.println("Room cannot be cleaned now.");
+            return false;
         }
 
     }
